@@ -7,6 +7,7 @@ let next = false;
 let num = "";
 let result;
 let reset = false
+let count = 0;
 
 for(let i = 0; i < 12; i++) {
     btn[i].addEventListener('click',tabel)
@@ -20,12 +21,19 @@ function tabel() {
         group_all = [];
         group_operators = [];
         group_numbers = [];
+        count = 0;
     }
     const text_ = this.getAttribute("id");
     if (text_ == "-" || text_ == "+") {
+        if (count == 0) {
+            text_bar.value += (" " + text_ + " ");
+            group_numbers.push(0);
+        }
+        else {
         group_numbers.push(parseInt(num));
         num = "";
         text_bar.value += (" " + text_ + " ");
+        }
     }
     else if (text_ == "=") {
         group_numbers.push(parseInt(num));
@@ -49,6 +57,7 @@ function tabel() {
     else {
         text_bar.value += text_;
         num += text_;
+        count++;
     }
     group_all.push(text_);
 
